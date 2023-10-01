@@ -1,0 +1,89 @@
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+    height: 20vh;
+    background: #6278F7;
+    position: relative;
+}
+
+footer ul {
+    display: flex;
+}
+
+footer ul li {
+    list-style: none;
+    margin: 0 1.5rem;
+    width: 1.6rem;
+}
+
+footer ul li img {
+    width: 100%;
+}
+
+footer h6 {
+    color: #fff;
+    font-size: clamp(1.4rem, 2vw, 2rem);
+    font-weight: normal;
+}
+
+footer ul,
+footer img,
+footer h6 {
+    z-index: 2;
+    position: relative;
+}
+
+.svg1 circle,
+.svg2 circle,
+.svg3 circle,
+.svg4 circle {
+    stroke-width: 2px;
+    stroke: #95FFD4;
+}
+
+.svg2 circle {
+    stroke: #fff;
+}
+
+.svg1 {
+    width: 7.708333333333334%;
+    flex-shrink: 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.svg2 {
+    width: 6.180555555555555%;
+    flex-shrink: 0;
+    position: absolute;
+    top: 2.5rem;
+    right: 35.040234089246525%;
+
+}
+
+.svg3 {
+    width: 7.708333333333334%;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+    position: absolute;
+    bottom: 3.3rem;
+    left: 31.56274056966898%;
+}
+
+.svg4 {
+    width: 6.25%;
+    flex-shrink: 0;
+    position: absolute;
+    bottom: 3.6rem;
+    left: 2.9rem;
+}
+
+.svg1,
+.svg2,
+.svg3,
+.svg4 {
+    height: fit-content;
+}
