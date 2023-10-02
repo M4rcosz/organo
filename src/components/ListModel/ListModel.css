@@ -6,6 +6,7 @@
 }
 
 .listModel select {
+    box-sizing: border-box;
     background: #fff;
     width: 100%;
     padding: 2.4rem;

@@ -87,3 +87,11 @@ footer h6 {
 .svg4 {
     height: fit-content;
 }
+
+@media screen and (max-width: 600px) {
+    footer {
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+    }
+}

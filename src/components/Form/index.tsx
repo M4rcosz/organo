@@ -59,7 +59,7 @@ const Form = ({ aoColaboradorCadastrado, times, cadastrarTime }: FormProps) => {
                 <Field
                     required
                     label="Data de Entrada"
-                    placeholder=''
+                    placeholder='dd/mm/aaaa'
                     value={dataDeEntrada}
                     aoAlterado={valor => setDataDeEntrada(valor)}
                     type="date"

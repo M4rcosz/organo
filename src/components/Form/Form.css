@@ -20,3 +20,9 @@
     font-size: clamp(2rem, 3vw, 3.4rem);
     font-weight: normal;
 }
+
+@media screen and (max-width: 600px) {
+    .form_container form {
+        padding: 2rem 6vw;
+    }
+}

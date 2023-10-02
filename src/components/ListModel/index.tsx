@@ -1,4 +1,5 @@
 import "./ListModel.css";
+import { AiOutlineArrowDown } from "react-icons/ai"
 
 interface ListModelProps {
     label: string
@@ -6,7 +7,6 @@ interface ListModelProps {
     required: boolean
     value: string
     itens: string[]
-
 }
 
 const ListModel = ({ label, aoAlterado, itens, required, value }: ListModelProps) => {
