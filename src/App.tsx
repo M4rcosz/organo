@@ -12,47 +12,7 @@ import { ITime } from "./shared/interfaces/ITime";
 
 function App() {
 
-  let predefido = [
-    {
-      id: uuidv4(),
-      nome: "Marcos Paulo",
-      cargo: "Chefe",
-      imagem: "https://github.com/m4rcosz.png",
-      timeSelecionado: "Programação",
-      favoritado: false,
-      dataDeEntrada: new Date("01-03-2000").toLocaleDateString()
-    },
-    {
-      id: uuidv4(),
-      nome: "Marcos Paulo",
-      cargo: "Chefe",
-      imagem: "https://github.com/m4rcosz.png",
-      timeSelecionado: "Mobile",
-      favoritado: false,
-      dataDeEntrada: new Date("01-03-2000").toLocaleDateString()
-    },
-    {
-      id: uuidv4(),
-      nome: "Marcos Paulo",
-      cargo: "Chefe",
-      imagem: "https://github.com/m4rcosz.png",
-      timeSelecionado: "Front End",
-      favoritado: false,
-      dataDeEntrada: new Date("01-03-2000").toLocaleDateString()
-    },
-    {
-      id: uuidv4(),
-      nome: "Marcos Paulo",
-      cargo: "Chefe",
-      imagem: "https://github.com/m4rcosz.png",
-      timeSelecionado: "Front End",
-      favoritado: false,
-      dataDeEntrada: new Date("01-03-2000").toLocaleDateString()
-    }
-  ]
-
-
-  const [colaboradores, setColaboradores] = useState<IColaborador[]>(predefido);
+  const [colaboradores, setColaboradores] = useState<IColaborador[]>([]);
 
   const [times, setTimes] = useState([
     {
@@ -108,8 +68,6 @@ function App() {
     }));
   }
 
-  const h1Estilo = { margin: "3rem auto", fontSize: "clamp(2rem, 3.5vw, 4rem)", borderBottom: "4px solid #6278F7", display: "inline-block", color: "#6278F7", paddingBottom: "1rem" }
-
   const cadastrarTime = (novoTime: ITime) =>
     setTimes([...times, { ...novoTime }])
 
@@ -119,7 +77,6 @@ function App() {
       return colaborador
     }))
   }
-
 
   return (
     <>
@@ -133,9 +90,6 @@ function App() {
         cadastrarTime={cadastrarTime}
       />
       <section className="times" style={{ display: "flex", flexDirection: "column", maxWidth: "100%" }}>
-        <h1 style={h1Estilo}>
-          Minha Organização
-        </h1>
         {times.map(time => <Team
           key={time.id}
           name={time.nome}

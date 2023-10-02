@@ -1,5 +1,4 @@
 import "./ListModel.css";
-import { AiOutlineArrowDown } from "react-icons/ai"
 
 interface ListModelProps {
     label: string
