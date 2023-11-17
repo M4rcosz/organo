@@ -9,14 +9,15 @@ interface FieldProps {
     value: string
 }
 
-const Field = ({ type = 'text', required = false, label, placeholder, aoAlterado, value }: FieldProps) => {
-
-    const placeholderText = placeholder;
-
-    let aoDigitar = (evento: React.ChangeEvent<HTMLInputElement>) => {
-        aoAlterado(evento.target.value);
-    }
-
+const Field = (
+    {
+        type = 'text',
+        required = false,
+        label,
+        placeholder,
+        aoAlterado,
+        value
+    }: FieldProps) => {
 
     return (
         <section className={`field field_${type}`}>
@@ -25,9 +26,9 @@ const Field = ({ type = 'text', required = false, label, placeholder, aoAlterado
                 style={{ cursor: type === "color" ? "pointer" : undefined }}
                 type={type}
                 value={value}
-                onChange={aoDigitar}
+                onChange={evento => aoAlterado(evento.target.value)}
                 required={required}
-                placeholder={placeholderText}
+                placeholder={placeholder}
             />
         </section>
     )

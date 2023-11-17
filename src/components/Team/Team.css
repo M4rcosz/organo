@@ -28,6 +28,15 @@
     right: 5rem;
 }
 
+.team_title {
+    margin: 3rem auto;
+    font-size: clamp(2rem, 3.5vw, 4rem);
+    border-bottom: 4px solid #6278F7;
+    display: inline-block;
+    color: #6278F7;
+    padding-bottom: 1rem;
+}
+
 @media screen and (max-width:600px) {
     .inputColor {
         width: 35px;

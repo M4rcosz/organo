@@ -23,11 +23,6 @@ body {
     }
 }
 
-@media screen and (max-width: 768px) {
-    body {
-        overflow-x: auto;
-    }
-}
 
 /* font-family: 'Montserrat', sans-serif; */
 /* font-family: 'Prata', serif; */

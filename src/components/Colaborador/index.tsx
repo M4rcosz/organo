@@ -1,22 +1,21 @@
 import { AiFillCloseCircle, AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 import "./Colaborador.css";
 import { IColaborador } from "../../shared/interfaces/IColaborador";
+import { useAppDispatch } from "@/hooks/redux";
+import { deleteCollaborator, toogleFavorite } from "@/store/reducer/collaborator";
 
 interface ColaboradorProps {
     cor: string
-    aoDeletar: (id: string) => void
     colaborador: IColaborador
-    aoFavoritar: (id: string) => object | void
 }
 
-const Colaborador = ({ cor, aoDeletar, colaborador, aoFavoritar }: ColaboradorProps) => {
-    const favoritar = () => {
-        aoFavoritar(colaborador.id)
-    }
+const Colaborador = ({ cor, colaborador }: ColaboradorProps) => {
+
+    const dispatch = useAppDispatch();
 
     const propsFavorito = {
         style: { fill: cor, cursor: "pointer" },
-        onClick: favoritar
+        onClick: () => dispatch(toogleFavorite(colaborador.id))
     }
 
     return (
@@ -25,7 +24,7 @@ const Colaborador = ({ cor, aoDeletar, colaborador, aoFavoritar }: ColaboradorPr
                 size={25}
                 cursor={"pointer"}
                 className="deletar"
-                onClick={() => aoDeletar(colaborador.id)}
+                onClick={() => dispatch(deleteCollaborator(colaborador.id))}
             />
             <div className="header" style={{ backgroundColor: cor }}>
                 <img

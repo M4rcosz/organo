@@ -1,7 +1,5 @@
-import { UUID } from "crypto"
-
 export interface IColaborador {
-    id: UUID | string
+    id: string
     nome: string
     cargo: string
     imagem: string
