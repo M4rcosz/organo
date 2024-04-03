@@ -1,11 +1,11 @@
 import "./Field.css";
 
 interface FieldProps {
-    type?: 'text' | 'email' | 'date' | 'password' | 'number' | 'color'
+    type?: 'text' | 'date' | 'color'
     required?: boolean
     label: string
     placeholder: string
-    aoAlterado: (valor: string) => void
+    onChange: (valor: string) => void
     value: string
 }
 
@@ -15,9 +15,10 @@ const Field = (
         required = false,
         label,
         placeholder,
-        aoAlterado,
-        value
+        onChange,
+        value,
     }: FieldProps) => {
+
 
     return (
         <section className={`field field_${type}`}>
@@ -26,7 +27,7 @@ const Field = (
                 style={{ cursor: type === "color" ? "pointer" : undefined }}
                 type={type}
                 value={value}
-                onChange={evento => aoAlterado(evento.target.value)}
+                onChange={event => onChange(event.target.value)}
                 required={required}
                 placeholder={placeholder}
             />

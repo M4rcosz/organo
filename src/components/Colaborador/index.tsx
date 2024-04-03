@@ -25,6 +25,7 @@ const Colaborador = ({ cor, colaborador }: ColaboradorProps) => {
                 cursor={"pointer"}
                 className="deletar"
                 onClick={() => dispatch(deleteCollaborator(colaborador.id))}
+                aria-label="Deletar colaborador"
             />
             <div className="header" style={{ backgroundColor: cor }}>
                 <img

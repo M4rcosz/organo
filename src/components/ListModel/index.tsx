@@ -2,13 +2,13 @@ import "./ListModel.css";
 
 interface ListModelProps {
     label: string
-    aoAlterado: (valor: string) => void
+    onChange: (valor: string) => void
     required: boolean
     value: string
     itens: string[]
 }
 
-const ListModel = ({ label, aoAlterado, itens, required, value }: ListModelProps) => {
+const ListModel = ({ label, onChange, itens, required, value }: ListModelProps) => {
 
     return (
         <section className="listModel">
@@ -16,11 +16,11 @@ const ListModel = ({ label, aoAlterado, itens, required, value }: ListModelProps
                 {label}
             </label>
             <select
-                onChange={evento => aoAlterado(evento.target.value)}
+                onChange={event => onChange(event.target.value)}
                 required={required}
                 value={value}
             >
-                <option value=""></option>
+                <option value="" disabled>Selecione o Time</option>
                 {itens.map(item => <option key={item}>{item}</option>)}
             </select>
         </section>

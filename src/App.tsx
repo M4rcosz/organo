@@ -12,6 +12,8 @@ const App = () => {
   const times = useAppSelector(state => state.team.teams);
   const colaboradores = useAppSelector(state => state.membersTeam.collaborators);
 
+  console.log(colaboradores)
+
   return (
     <>
       <Banner

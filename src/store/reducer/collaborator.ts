@@ -1,75 +1,63 @@
-import type { ICreateCollaborator, IDeleteCollaborator, IInitialStateType, IToogleFavorite } from "@/shared/interfaces/payload/ICollaborator";
-import { PayloadString } from "@/shared/interfaces/payload/shortsType";
 import { createSlice } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from 'uuid';
 
-const initialState: IInitialStateType = {
+interface ICreateCollaborator {
+    nome: string;
+    cargo: string;
+    imagem: string;
+    dataDeEntrada: string;
+    timeSelecionado: string;
+}
+
+interface IInitialState {
+    collaborators: {
+        id: string;
+        nome: string;
+        cargo: string;
+        imagem: string;
+        dataDeEntrada: string;
+        timeSelecionado: string;
+        favoritado: boolean;
+    }[]
+}
+
+const initialState: IInitialState = {
     collaborators: [
         {
-            id: "CHEFE",
+            id: "1",
             nome: "Marcos",
-            cargo: "",
+            cargo: "Boss",
             imagem: "",
-            dataDeEntrada: "",
+            dataDeEntrada: "11/01/2021",
             timeSelecionado: "Mobile",
-            favoritado: false
+            favoritado: true
         },
     ],
-    createCollaboratorTemplate: {
-        nome: "",
-        cargo: "",
-        imagem: "",
-        timeSelecionado: "",
-        dataDeEntrada: "",
-    }
 }
 
 const collaboratorSlice = createSlice({
     name: "collaboratorSlice",
     initialState,
     reducers: {
-        setCollaboratorName: (state, { payload }: PayloadString) => void
-            (state.createCollaboratorTemplate.nome = payload),
-        setCollaboratorOffice: (state, { payload }: PayloadString) => void
-            (state.createCollaboratorTemplate.cargo = payload),
-        setCollaboratorImage: (state, { payload }: PayloadString) => void
-            (state.createCollaboratorTemplate.imagem = payload),
-        setCollaboratorTeam: (state, { payload }: PayloadString) => void
-            (state.createCollaboratorTemplate.timeSelecionado = payload),
-        setCollaboratorDate: (state, { payload }: PayloadString) => void
-            (state.createCollaboratorTemplate.dataDeEntrada = payload),
-
-        createCollaborator: (state, { payload }: ICreateCollaborator) => void
-            (state.collaborators = [...state.collaborators, { id: uuidv4(), ...payload, favoritado: false }]),
-        deleteCollaborator: (state, { payload }: IDeleteCollaborator) => void
-            (state.collaborators = state.collaborators.filter(collaborator => collaborator.id != payload)),
-        toogleFavorite: (state, { payload }: IToogleFavorite) => {
+        createCollaborator: (state, { payload }: { payload: ICreateCollaborator }) => {
+            state.collaborators = [...state.collaborators, { id: uuidv4(), ...payload, favoritado: false }]
+            console.log(payload)
+        },
+        deleteCollaborator: (state, { payload }: { payload: string }) => {
+            state.collaborators = state.collaborators.filter(collaborator => collaborator.id != payload)
+        },
+        toogleFavorite: (state, { payload }: { payload: string }) => {
             state.collaborators.map(collaborator => {
                 if (collaborator.id === payload) collaborator.favoritado = !collaborator.favoritado;
             })
         },
-        resetCollaboratorsInput: state => {
-            state.createCollaboratorTemplate = {
-                nome: "",
-                cargo: "",
-                imagem: "",
-                timeSelecionado: "",
-                dataDeEntrada: "",
-            }
-        }
     }
 })
 
 export const {
-    setCollaboratorName,
-    setCollaboratorOffice,
-    setCollaboratorImage,
-    setCollaboratorTeam,
-    setCollaboratorDate,
     createCollaborator,
     deleteCollaborator,
     toogleFavorite,
-    resetCollaboratorsInput
 } = collaboratorSlice.actions;
 
 export const collaboratorSliceReducer = collaboratorSlice.reducer;

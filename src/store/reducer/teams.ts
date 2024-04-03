@@ -1,7 +1,20 @@
 import { v4 as uuidv4 } from 'uuid';
 import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadString } from '@/shared/interfaces/payload/shortsType';
-import type { IChangeTeamColor, ICreateTeam, IInitialState } from '@/shared/interfaces/payload/ITeam';
+
+interface ITeam {
+    id: string
+    name: string
+    color: string
+}
+
+interface IInitialState {
+    teams: ITeam[]
+    createTeamTemplate: {
+        id: string
+        teamName: string
+        teamColor: string
+    }
+}
 
 const teams = [
     {
@@ -54,12 +67,14 @@ export const teamSlice = createSlice({
     name: "teamSlice",
     initialState,
     reducers: {
-        setTeamName: (state, { payload }: PayloadString) => void
-            (state.createTeamTemplate.teamName = payload),
+        setTeamName: (state, { payload }: { payload: string }) => {
+            state.createTeamTemplate.teamName = payload
+        },
 
-        setTeamColor: (state, { payload }: PayloadString) => void
-            (state.createTeamTemplate.teamColor = payload),
-        addTeam: (state, { payload }: ICreateTeam) => {
+        setTeamColor: (state, { payload }: { payload: string }) => {
+            state.createTeamTemplate.teamColor = payload
+        },
+        createTeam: (state, { payload }: { payload: { name: string; color: string } }) => {
             state.teams = [
                 ...state.teams,
                 {
@@ -67,24 +82,17 @@ export const teamSlice = createSlice({
                     ...payload
                 }]
         },
-        onChangeTeamColor: (state, { payload }: IChangeTeamColor) => {
+        onChangeTeamColor: (state, { payload }: { payload: { id: string; color: string } }) => {
             state.teams.map(team => {
                 if (team.id === payload.id) {
                     team.color = payload.color
                 }
             })
         },
-        resetTeamInput: state => {
-            state.createTeamTemplate = {
-                ...state.createTeamTemplate,
-                teamName: "",
-                teamColor: ""
-            }
-        }
     }
 })
 
-export const { setTeamColor, setTeamName, addTeam, onChangeTeamColor, resetTeamInput } = teamSlice.actions;
+export const { setTeamColor, setTeamName, createTeam, onChangeTeamColor } = teamSlice.actions;
 
 export const teamSliceReducer = teamSlice.reducer;
 

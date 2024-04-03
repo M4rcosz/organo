@@ -9,7 +9,7 @@ const Footer = () => {
                 <li><img src="/images/ig.png" alt="logo do instagram" /></li>
             </ul>
             <img src="/images/logo.png" alt="logo organo" />
-            <h6>Desenvolvido por Alura.</h6>
+            <h6>Desenvolvido por Marcos Paulo.</h6>
             <svg xmlns="http://www.w3.org/2000/svg" width="95" height="91" viewBox="0 0 95 91" fill="none" className="svg1">
                 <circle cx="55.5" cy="55.5" r="54.5" stroke="#95FFD4" strokeWidth="2" />
             </svg>

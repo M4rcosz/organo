@@ -2,102 +2,105 @@ import Button from "@/components/Button";
 import ListModel from "@/components/ListModel";
 import Field from "@/components/Field";
 import "./Form.css";
-import { addTeam, resetTeamInput, setTeamColor, setTeamName } from "@/store/reducer/teams";
+import { createTeam } from "@/store/reducer/teams";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import { createCollaborator, resetCollaboratorsInput, setCollaboratorDate, setCollaboratorImage, setCollaboratorName, setCollaboratorOffice, setCollaboratorTeam } from "@/store/reducer/collaborator";
+import { createCollaborator } from "@/store/reducer/collaborator";
+import { useState } from "react"
 
 const Form = () => {
     const dispatch = useAppDispatch();
 
-    const {
-        createTeamTemplate: {
-            teamName:
-            inputTeamName,
-            teamColor:
-            inputTeamColor
-        },
-        teams: times
-    } = useAppSelector(state => state.team);
+    const times = useAppSelector(state => state.team.teams);
 
-    const colaborador = useAppSelector(state => state.membersTeam.createCollaboratorTemplate);
+    const [colaboradorNome, setColabodadorNome] = useState("");
+    const [colaboradorCargo, setColabodadorCargo] = useState("");
+    const [colaboradorImagem, setColabodadorImagem] = useState("");
+    const [colaboradorData, setColabodadorData] = useState("");
+    const [colaboradorTime, setColabodadorTime] = useState("");
 
-    const aoCriarColaborador = (evento: React.FormEvent<HTMLFormElement>) => {
-        evento.preventDefault();
+    const [timeNome, setTimeNome] = useState("");
+    const [timeCor, setTimeCor] = useState("#ff0000");
+
+    const aoCriarColaborador = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+
         dispatch(createCollaborator({
-            nome: colaborador.nome,
-            cargo: colaborador.cargo,
-            imagem: colaborador.imagem,
-            dataDeEntrada: colaborador.dataDeEntrada,
-            timeSelecionado: colaborador.timeSelecionado,
+            nome: colaboradorNome,
+            cargo: colaboradorCargo,
+            imagem: colaboradorImagem,
+            dataDeEntrada: colaboradorData,
+            timeSelecionado: colaboradorTime,
         }))
-        dispatch(resetCollaboratorsInput())
-    }
+
+    };
 
     const aoCriarTime = (evento: React.FormEvent<HTMLFormElement>) => {
         evento.preventDefault();
-        dispatch(addTeam({
-            name: inputTeamName,
-            color: inputTeamColor
+        dispatch(createTeam({
+            name: timeNome,
+            color: timeCor
         }))
-        dispatch(resetTeamInput())
     }
 
     return (
+        // Colaboorador
         <section className="form_container">
-            <form onSubmit={aoCriarColaborador}>
+            <form onSubmit={event => aoCriarColaborador(event)}>
                 <h2>Preencha os dados para criar o card do colaborador.</h2>
                 <Field
-                    aoAlterado={valor => dispatch(setCollaboratorName(valor))}
+                    onChange={setColabodadorNome}
                     required
                     label="Nome"
                     placeholder="Digite seu nome"
-                    value={colaborador.nome}
+                    value={colaboradorNome}
                 />
                 <Field
-                    aoAlterado={valor => dispatch(setCollaboratorOffice(valor))}
+                    onChange={setColabodadorCargo}
                     required
                     label="Cargo"
                     placeholder="Digite seu cargo"
-                    value={colaborador.cargo}
+                    value={colaboradorCargo}
                 />
                 <Field
-                    aoAlterado={valor => dispatch(setCollaboratorImage(valor))}
+                    onChange={setColabodadorImagem}
                     label="Imagem"
                     placeholder="Informe o endereço da imagem"
-                    value={colaborador.imagem}
+                    value={colaboradorImagem}
                 />
                 <Field
-                    aoAlterado={valor => dispatch(setCollaboratorDate(valor))}
+                    onChange={setColabodadorData}
                     required
                     label="Data de Entrada"
                     placeholder='dd/mm/aaaa'
-                    value={colaborador.dataDeEntrada}
+                    value={colaboradorData}
                     type="date"
                 />
                 <ListModel
-                    aoAlterado={valor => dispatch(setCollaboratorTeam(valor))}
+                    onChange={setColabodadorTime}
                     required
                     label="Time"
                     itens={times.map(time => time.name)}
-                    value={colaborador.timeSelecionado}
+                    value={colaboradorTime}
                 />
                 <Button>Criar card</Button>
             </form>
+
+            {/* Time */}
             <form onSubmit={aoCriarTime}>
                 <h2>Preencha os dados para criar um novo time.</h2>
                 <Field
-                    aoAlterado={valor => dispatch(setTeamName(valor))}
+                    onChange={setTimeNome}
                     required
                     label="Nome"
                     placeholder="Digite o nome do time"
-                    value={inputTeamName}
+                    value={timeNome}
                 />
                 <Field
-                    aoAlterado={valor => dispatch(setTeamColor(valor))}
+                    onChange={setTimeCor}
                     required
                     label="Cor"
                     placeholder="Digite a cor do time"
-                    value={inputTeamColor}
+                    value={timeCor}
                     type="color"
                 />
                 <Button>Criar um novo time</Button>
